@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert PDF to Word, Word to PDF, and Images to PDF online. Optimize your documents with adjustable compression levels.">
+    <meta name="keywords" content="PDF to Word, Word to PDF, Image to PDF, document converter, compress PDF, compress Word">
+    <meta name="author" content="Your Name">
+    <title>PDF, Word & Image Converter</title>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4525488810073557" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        #converter {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        #pdf-to-word, #word-to-pdf, #image-to-pdf {
+            background-color: #fff;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 45%;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        input[type="file"], select, button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        #advertisement {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .drop-zone {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        .drop-zone.dragover {
+            border-color: #333;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .progress-bar-inner {
+            width: 0;
+            height: 10px;
+            background-color: #4caf50;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            #pdf-to-word, #word-to-pdf, #image-to-pdf {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PDF, Word & Image Converter</h1>
+    </header>
+
+    <main>
+        <section id="converter">
+            <!-- PDF to Word Converter -->
+            <div id="pdf-to-word">
+                <h2>PDF to Word Converter</h2>
+                <div class="drop-zone" id="pdf-drop-zone">
+                    <p>Drag & Drop a PDF file here or click to upload.</p>
+                    <input type="file" id="pdf-file" accept=".pdf" hidden>
+                </div>
+                <select id="pdf-compression">
+                    <option value="low">Low Compression</option>
+                    <option value="medium">Medium Compression</option>
+                    <option value="high">High Compression</option>
+                </select>
+                <button id="convert-pdf-to-word">Convert to Word</button>
+                <div class="progress-bar">
+                    <div class="progress-bar-inner" id="pdf-progress"></div>
+                </div>
+                <a id="pdf-download-link" style="display: none;">Download Converted Word File</a>
+            </div>
+
+            <!-- Word to PDF Converter -->
+            <div id="word-to-pdf">
+                <h2>Word to PDF Converter</h2>
+                <div class="drop-zone" id="word-drop-zone">
+                    <p>Drag & Drop a Word file here or click to upload.</p>
+                    <input type="file" id="word-file" accept=".doc,.docx" hidden>
+                </div>
+                <select id="word-compression">
+                    <option value="low">Low Compression</option>
+                    <option value="medium">Medium Compression</option>
+                    <option value="high">High Compression</option>
+                </select>
+                <button id="convert-word-to-pdf">Convert to PDF</button>
+                <div class="progress-bar">
+                    <div class="progress-bar-inner" id="word-progress"></div>
+                </div>
+                <a id="word-download-link" style="display: none;">Download Converted PDF File</a>
+            </div>
+
+            <!-- Image to PDF Converter -->
+            <div id="image-to-pdf">
+                <h2>Image to PDF Converter</h2>
+                <div class="drop-zone" id="image-drop-zone">
+                    <p>Drag & Drop an Image file here or click to upload.</p>
+                    <input type="file" id="image-file" accept=".jpg,.jpeg,.png" hidden>
+                </div>
+                <select id="image-compression">
+                    <option value="low">Low Compression</option>
+                    <option value="medium">Medium Compression</option>
+                    <option value="high">High Compression</option>
+                </select>
+                <button id="convert-image-to-pdf">Convert to PDF</button>
+                <div class="progress-bar">
+                    <div class="progress-bar-inner" id="image-progress"></div>
+                </div>
+                <a id="image-download-link" style="display: none;">Download Converted PDF File</a>
+            </div>
+        </section>
+
+        <!-- Advertisement Section -->
+        <section id="advertisement">
+            <!-- Google AdSense Ad Unit -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4525488810073557"
+                 data-ad-slot="7557473118"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </section>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast">File converted successfully!</div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 PDF, Word & Image Converter. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Drag and Drop Functionality
+        const pdfDropZone = document.getElementById('pdf-drop-zone');
+        const pdfFileInput = document.getElementById('pdf-file');
+        const wordDropZone = document.getElementById('word-drop-zone');
+        const wordFileInput = document.getElementById('word-file');
+        const imageDropZone = document.getElementById('image-drop-zone');
+        const imageFileInput = document.getElementById('image-file');
+
+        pdfDropZone.addEventListener('click', () => pdfFileInput.click());
+        wordDropZone.addEventListener('click', () => wordFileInput.click());
+        imageDropZone.addEventListener('click', () => imageFileInput.click());
+
+        pdfDropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            pdfDropZone.classList.add('dragover');
+        });
+
+        pdfDropZone.addEventListener('dragleave', () => {
+            pdfDropZone.classList.remove('dragover');
+        });
+
+        pdfDropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            pdfDropZone.classList.remove('dragover');
+            pdfFileInput.files = e.dataTransfer.files;
+        });
+
+        wordDropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            wordDropZone.classList.add('dragover');
+        });
+
+        wordDropZone.addEventListener('dragleave', () => {
+            wordDropZone.classList.remove('dragover');
+        });
+
+        wordDropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            wordDropZone.classList.remove('dragover');
+            wordFileInput.files = e.dataTransfer.files;
+        });
+
+        imageDropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            imageDropZone.classList.add('dragover');
+        });
+
+        imageDropZone.addEventListener('dragleave', () => {
+            imageDropZone.classList.remove('dragover');
+        });
+
+        imageDropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            imageDropZone.classList.remove('dragover');
+            imageFileInput.files = e.dataTransfer.files;
+        });
+
+        // Conversion Functionality
+        document.getElementById('convert-pdf-to-word').addEventListener('click', function() {
+            const file = pdfFileInput.files[0];
+            const compression = document.getElementById('pdf-compression').value;
+            if (file) {
+                simulateConversion('pdf-progress', 'pdf-download-link');
+            } else {
+                showToast('Please select a PDF file.');
+            }
+        });
+
+        document.getElementById('convert-word-to-pdf').addEventListener('click', function() {
+            const file = wordFileInput.files[0];
+            const compression = document.getElementById('word-compression').value;
+            if (file) {
+                simulateConversion('word-progress', 'word-download-link');
+            } else {
+                showToast('Please select a Word file.');
+            }
+        });
+
+        document.getElementById('convert-image-to-pdf').addEventListener('click', function() {
+            const file = imageFileInput.files[0];
+            const compression = document.getElementById('image-compression').value;
+            if (file) {
+                simulateConversion('image-progress', 'image-download-link');
+            } else {
+                showToast('Please select an Image file.');
+            }
+        });
+
+        function simulateConversion(progressId, downloadLinkId) {
+            const progressBar = document.getElementById(progressId);
+            const downloadLink = document.getElementById(downloadLinkId);
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    showToast('File converted successfully!');
+                    downloadLink.style.display = 'block';
+                    downloadLink.href = '#'; // Replace with actual download link
+                } else {
+                    width += 10;
+                    progressBar.style.width = width + '%';
+                }
+            }, 300);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
